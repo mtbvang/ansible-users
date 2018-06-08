@@ -65,3 +65,17 @@
   with_items: "{{users_deleted}}"
   when: users_create_per_user_group
   tags: ['users','configuration']
+
+- name: "Create sudoers.d fragments for users"
+  template:
+    src: sudoers.j2
+    dest: "/etc/sudoers.d/{{ item.sudoers_d_prefix }}_{{  item.username }}"
+    owner: root
+    group: root
+    mode: 0640
+  when:
+    item.sudo is defined and item.sudo != False
+  with_items:
+    "{{ users }}"
+    
+

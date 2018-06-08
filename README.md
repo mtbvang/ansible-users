@@ -43,7 +43,13 @@ The following attributes are required for each user:
 * ssh_key - This should be a list of SSH keys for the user (optional). Each SSH key
   should be included directly and should have no newlines.
 * generate_ssh_key - Whether to generate a SSH key for the user (optional, defaults to no).
-
+* sudo - Can be yes, no, nopasswd, or custom (if custom, use sudo_custom options below)
+* sudo_custom - Add in custom sudoers lines for this user
+		- name: root
+      nopasswd: yes
+      command_line: /usr/bin/chmod
+    - command_line: ALL
+    
 In addition, the following items are optional for each user:
 
 * shell - The user's shell. This defaults to /bin/bash. The default is
